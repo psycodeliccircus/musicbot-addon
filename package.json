@@ -1,0 +1,33 @@
+{
+  "name": "musicbot-addon",
+  "version": "13.9.1",
+  "description": "A simple Node.js based music extension/bot for Discord.js projects using YouTube.",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "ytdl-core": "^1.0.7",
+    "ytpl": "^0.1.18",
+    "ytsearcher": "^1.2.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/psycodeliccircus/musicbot-addon"
+  },
+  "bugs": {
+    "url": "https://github.com/psycodeliccircus/musicbot-addon/issues"
+  },
+  "homepage": "https://github.com/psycodeliccircus/musicbot-addon",
+  "keywords": [
+    "discord",
+    "discord.js",
+    "music",
+    "bot",
+    "addon",
+    "plugin"
+  ],
+  "author": "renildomarcio",
+  "license": "ISC"
+}
