@@ -22,7 +22,7 @@ client.music.start(client, {
 // Connect the bot with your Discord applications bot token.
 client.login("token");
 ```
-That example will run the bot with default settings (as seen in the readme file) and will respond to its commands. Now, let's add a few options to it:
+Esse exemplo executará o bot com as configurações padrão (como visto no arquivo leia-me) e responderá a seus comandos. Agora, vamos adicionar algumas opções a ele:
 ```js
 // Following the previous example.
 client.music.start(client, {
@@ -52,10 +52,10 @@ client.music.start(client, {
   }
 });
 ```
-Following that, we've added some custom options to the bot. It will now use those instead of it's preset ones.  
+Depois disso, adicionamos algumas opções personalizadas ao bot. Agora, eles serão usados em vez dos predefinidos.
 
-# Calling Commands
-We'll now go over interacting with the bot and it's data. The first will be of changing your set YouTube Data key.
+# Chamando comandos
+Vamos agora interagir com o bot e seus dados. A primeira será a alteração da chave de dados do YouTube definida.
 ```js
 // Assuming you've followed the first example.
 // <Client> will stand for the client object.
@@ -71,7 +71,7 @@ We'll now go over interacting with the bot and it's data. The first will be of c
 })
 ```
 
-Now we'll go over calling functions outside of the module.
+Agora, veremos as funções de chamada fora do módulo.
 ```js
 // Here is a list of command functions for refence.
 <Music>.playFunction();   // PLAY command.
@@ -124,8 +124,8 @@ client.on("message", (msg) => {
 });
 ```
 
-# Multi-Prefix Setup
-First, you'll need a list of your servers and the custom prefix for the server if it uses one. You'll also need to specify the default prefix.
+# Configuração de vários prefixos
+Primeiro, você precisará de uma lista de seus servidores e o prefixo personalizado para o servidor, se ele usar um. Você também precisará especificar o prefixo padrão.
 ```js
 var options = {
   427239929924288532: {

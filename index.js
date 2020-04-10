@@ -79,7 +79,7 @@ try {
           enabled: (options.leave == undefined ? true : (options.leave && typeof options.leave.enabled !== 'undefined' ? options.leave && options.leave.enabled : true)),
           run: "leaveFunction",
           alt: (options && options.leave && options.leave.alt) || [],
-          help: (options && options.leave && options.leave.help) || "Sai do canal de voz.",
+          help: (options && options.leave && options.leave.help) || "Deixa o canal de voz.",
           name: (options && options.leave && options.leave.name) || "leave",
           usage: (options && options.leave && options.leave.usage) || null,
           exclude: Boolean((options && options.leave && options.leave.exclude)),
@@ -103,7 +103,7 @@ try {
           enabled: (options.np == undefined ? true : (options.np && typeof options.np.enabled !== 'undefined' ? options.np && options.np.enabled : true)),
           run: "npFunction",
           alt: (options && options.np && options.np.alt) || [],
-          help: (options && options.np && options.np.help) || "Mostra o texto que está sendo reproduzido.",
+          help: (options && options.np && options.np.help) || "Mostra o texto Tocando agora.",
           name: (options && options.np && options.np.name) || "np",
           usage: (options && options.np && options.np.usage) || null,
           exclude: Boolean((options && options.np && options.np.exclude)),
@@ -151,7 +151,7 @@ try {
           enabled: (options.volume == undefined ? true : (options.volume && typeof options.volume.enabled !== 'undefined' ? options.volume && options.volume.enabled : true)),
           run: "volumeFunction",
           alt: (options && options.volume && options.volume.alt) || [],
-          help: (options && options.volume && options.volume.help) || "Altera a saída do volume do bot.",
+          help: (options && options.volume && options.volume.help) || "Changes the volume output of the bot.",
           name: (options && options.volume && options.volume.name) || "volume",
           usage: (options && options.volume && options.volume.usage) || null,
           exclude: Boolean((options && options.volume && options.volume.exclude)),
@@ -162,7 +162,7 @@ try {
           enabled: (options.remove == undefined ? true : (options.remove && typeof options.remove.enabled !== 'undefined' ? options.remove && options.remove.enabled : true)),
           run: "removeFunction",
           alt: (options && options.remove && options.remove.alt) || [],
-          help: (options && options.remove && options.remove.help) || "Remova uma música da fila por posição na fila.",
+          help: (options && options.remove && options.remove.help) || "Remove a song from the queue by position in the queue.",
           name: (options && options.remove && options.remove.name) || "remove",
           usage: (options && options.remove && options.remove.usage) || "{{prefix}}remove [position]",
           exclude: Boolean((options && options.remove && options.remove.exclude)),
@@ -174,7 +174,7 @@ try {
           enabled: (options.skip == undefined ? true : (options.skip && typeof options.skip.enabled !== 'undefined' ? options.skip && options.skip.enabled : true)),
           run: "skipFunction",
           alt: (options && options.skip && options.skip.alt) || [],
-          help: (options && options.skip && options.skip.help) || "Pule uma música ou músicas com `skip [número]`",
+          help: (options && options.skip && options.skip.help) || "Skip a song or songs with `skip [number]`",
           name: (options && options.skip && options.skip.name) || "skip",
           usage: (options && options.skip && options.skip.usage) || null,
           exclude: Boolean((options && options.skip && options.skip.exclude)),
@@ -184,7 +184,7 @@ try {
             enabled: (options.shuffle == undefined ? true : (options.shuffle && typeof options.shuffle.enabled !== 'undefined' ? options.shuffle && options.shuffle.enabled : true)),
             run: "shuffleFunction",
             alt: (options && options.shuffle && options.shuffle.alt) || [],
-            help: (options && options.shuffle && options.shuffle.help) || "Reproduzir aleatoriamente a fila",
+            help: (options && options.shuffle && options.shuffle.help) || "Shuffle the queue",
             name: (options && options.shuffle && options.shuffle.name) || "shuffle",
             usage: (options && options.shuffle && options.shuffle.usage) || null,
             exclude: Boolean((options && options.shuffle && options.shuffle.exclude)),
@@ -249,7 +249,7 @@ try {
 
       checkVoice(mem, bot) {
         return new Promise((resolve, reject) => {
-          if (!mem || !bot) reject("argumentos inválidos");
+          if (!mem || !bot) reject("invalid args");
           if (!mem.voice.channel) reject("Você não está em um canal de voz!");
           if (bot.voice.channel) {
             if (bot.voice.channel.id == mem.voice.channel.id) resolve(mem.voice.channel)
@@ -453,7 +453,7 @@ try {
           if (tCmd.enabled) {
             if (!musicbot.cooldown.enabled == true && !musicbot.cooldown.exclude.includes(tCmd.masked)) {
               if (musicbot.recentTalk.has(msg.author.id)) {
-                if (musicbot.cooldown.enabled == true && !musicbot.cooldown.exclude.includes(tCmd.masked)) return msg.channel.send(musicbot.note("fail", "You must wait to use music commands again."));
+                if (musicbot.cooldown.enabled == true && !musicbot.cooldown.exclude.includes(tCmd.masked)) return msg.channel.send(musicbot.note("fail", "Você deve esperar para usar os comandos de música novamente."));
               }
               musicbot.recentTalk.add(msg.author.id);
               setTimeout(() => { musicbot.recentTalk.delete(msg.author.id) }, musicbot.cooldown.timer);
@@ -465,7 +465,7 @@ try {
           if (aCmd.enabled) {
             if (!musicbot.cooldown.enabled == true && !musicbot.cooldown.exclude.includes(aCmd.masked)) {
               if (musicbot.recentTalk.has(msg.author.id)) {
-                if (musicbot.cooldown.enabled == true && !musicbot.cooldown.exclude.includes(aCmd.masked)) return msg.channel.send(musicbot.note("fail", "You must wait to use music commands again."));
+                if (musicbot.cooldown.enabled == true && !musicbot.cooldown.exclude.includes(aCmd.masked)) return msg.channel.send(musicbot.note("fail", "Você deve esperar para usar os comandos de música novamente."));
               }
               musicbot.recentTalk.add(msg.author.id);
               setTimeout(() => { musicbot.recentTalk.delete(msg.author.id) }, musicbot.cooldown.timer);
@@ -565,7 +565,7 @@ try {
                 .replace(/`/g, '\\`');
                 embed.setColor(musicbot.embedColor);
                 embed.addField(res.channelTitle, `[${songTitle}](${res.url})`, musicbot.inlineEmbeds);
-                embed.addField("Queued On", res.queuedOn, musicbot.inlineEmbeds);
+                embed.addField("Em fila", res.queuedOn, musicbot.inlineEmbeds);
                 if (!musicbot.bigPicture) embed.setThumbnail(`https://img.youtube.com/vi/${res.id}/maxresdefault.jpg`);
                 if (musicbot.bigPicture) embed.setImage(`https://img.youtube.com/vi/${res.id}/maxresdefault.jpg`);
                 const resMem = client.users.cache.get(res.requester);
@@ -585,7 +585,7 @@ try {
                 .replace(/_/g, '\\_')
                 .replace(/~/g, '\\~')
                 .replace(/`/g, '\\`');
-                msg.channel.send(`Em reprodução: **${songTitle}**\nRequerido por: ${client.users.cache.get(res.requester).username}\nQueued On: ${res.queuedOn}`)
+                msg.channel.send(`Tocando agora: **${songTitle}**\nRequerido por: ${client.users.cache.get(res.requester).username}\nQueued On: ${res.queuedOn}`)
               } catch (e) {
                 console.error(`[${msg.guild.name}] [npCmd] ` + e.stack);
               };
@@ -672,7 +672,7 @@ try {
           .has('EMBED_LINKS')) {
           const embed = new Discord.RichEmbed();
           command = musicbot.commands.get(command) || musicbot.aliases.get(command);
-          if (command.exclude) return msg.channel.send(musicbot.note('fail', `${suffix} is not a valid command!`));
+          if (command.exclude) return msg.channel.send(musicbot.note('fail', `${suffix} não é um comando válido!`));
           embed.setAuthor(command.name, msg.client.user.avatarURL());
           embed.setDescription(command.help);
           if (command.alt.length > 0) embed.addField(`Aliases`, command.alt.join(", "), musicbot.inlineEmbeds);
@@ -683,7 +683,7 @@ try {
           });
         } else {
           command = musicbot.commands.get(command) || musicbot.aliases.get(command);
-          if (command.exclude) return msg.channel.send(musicbot.note('fail', `${suffix} is not a valid command!`));
+          if (command.exclude) return msg.channel.send(musicbot.note('fail', `${suffix} não é um comando válido!`));
           var cmdhelp = `= ${command.name} =\n`;
           cmdhelp = cmdhelp + `\n${command.help}`;
           if (command.usage !== null) cmdhelp = cmdhelp + `\nUsage: ${command.usage.replace(/{{prefix}})/g, prefix)}`;
@@ -693,14 +693,14 @@ try {
           });
         };
       } else {
-        msg.channel.send(musicbot.note('fail', `${suffix} is not a valid command!`));
+        msg.channel.send(musicbot.note('fail', `${suffix} não é um comando válido!`));
       };
     };
 
     musicbot.skipFunction = (msg, suffix, args) => {
       if (!msg.member.voice.channel) return msg.channel.send(musicbot.note('fail', `Você não está em um canal de voz.`));
       const voiceConnection = client.voice.connections.find(val => val.channel.guild.id == msg.guild.id);
-      if (voiceConnection === null) return msg.channel.send(musicbot.note('fail', 'Nenhuma música sendo tocada.'));
+      if (voiceConnection === null) return msg.channel.send(musicbot.note('fail', 'Nenhuma música sendo reproduzida.'));
       if (voiceConnection && voiceConnection.channel.id != msg.member.voice.channel.id) return msg.channel.send(musicbot.note('fail', `Você deve estar no mesmo canal de voz que eu.`));
 
       const queue = musicbot.getQueue(msg.guild.id);
@@ -715,13 +715,13 @@ try {
       };
       if (voiceConnection.paused) dispatcher.destroy();
       dispatcher.destroy();
-      msg.channel.send(musicbot.note("note", "Música pulada."));
+      msg.channel.send(musicbot.note("note", "Música ignorada."));
     };
 
     musicbot.pauseFunction = (msg, suffix, args) => {
       if (!msg.member.voice.channel) return msg.channel.send(musicbot.note('fail', `Você não está em um canal de voz.`));
       const voiceConnection = client.voice.connections.find(val => val.channel.guild.id == msg.guild.id);
-      if (voiceConnection === null) return msg.channel.send(musicbot.note('fail', 'Nenhuma música sendo tocada.'));
+      if (voiceConnection === null) return msg.channel.send(musicbot.note('fail', 'Nenhuma música sendo reproduzida.'));
       if (voiceConnection && voiceConnection.channel.id != msg.member.voice.channel.id) return msg.channel.send(musicbot.note('fail', `Você deve estar no mesmo canal de voz que eu.`));
       if (!musicbot.isAdmin(msg.member) && !musicbot.anyoneCanPause) return msg.channel.send(musicbot.note('fail', 'Você não pode pausar filas.'));
 
@@ -741,7 +741,7 @@ try {
       const dispatcher = voiceConnection.player.dispatcher;
       if (!dispatcher.paused) return msg.channel.send(musicbot.note('fail', `Música já tocando.`))
       else dispatcher.resume();
-      msg.channel.send(musicbot.note('note', 'A reprodução foi retomada.'));
+      msg.channel.send(musicbot.note('note', 'Reprodução retomada.'));
     };
 
     musicbot.leaveFunction = (msg, suffix) => {
@@ -809,7 +809,7 @@ try {
             .replace(/_/g, '\\_')
             .replace(/~/g, '\\~')
             .replace(/`/g, '\\`');
-          msg.channel.send(`Em reprodução: **${songTitle}**\nRequerido por: ${client.users.cache.get(queue.last.requester).username}\nQueued On: ${queue.last.queuedOn}`)
+          msg.channel.send(`Tocando agora: **${songTitle}**\nRequerido por: ${client.users.cache.get(queue.last.requester).username}\nEm fila: ${queue.last.queuedOn}`)
         } catch (e) {
           console.error(`[${msg.guild.name}] [npCmd] ` + e.stack);
         };
@@ -874,7 +874,7 @@ try {
           });
 
           const embed = new Discord.RichEmbed();
-          embed.setAuthor('Músicas em fila', client.user.avatarURL());
+          embed.setAuthor('Música em filas', client.user.avatarURL());
           embed.setColor(musicbot.embedColor);
           embed.setFooter(`Página ${page} de ${pages.length}`);
           embed.setDescription(pages[page - 1]);
@@ -920,13 +920,13 @@ try {
     musicbot.searchFunction = (msg, suffix, args) => {
       if (msg.member.voice.channel === undefined) return msg.channel.send(musicbot.note('fail', `Você não está em um canal de voz.`));
       let vc = client.voice.connections.find(val => val.channel.guild.id == msg.member.guild.id)
-      if (vc && vc.channel.id != msg.member.voice.channel.id) return msg.channel.send(musicbot.note('fail', `You must be in the same voice channel as me.`));
+      if (vc && vc.channel.id != msg.member.voice.channel.id) return msg.channel.send(musicbot.note('fail', `Você deve estar no mesmo canal de voz que eu.`));
       let us = `${msg.guild.id}-${msg.author.id}`;
       if (musicbot.userSearching.has(us)) return msg.channel.send(musicbot.note("fail", `You already have a search on-going for \`${musicbot.userSearching.get(us).title}\`.\nYou may type \`cancel\` to cancel it.`));
 
       if (!suffix) return msg.channel.send(musicbot.note('fail', 'Nenhum vídeo especificado!'));
       const queue = musicbot.getQueue(msg.guild.id);
-      if (queue.songs.length >= musicbot.maxQueueSize && musicbot.maxQueueSize !== 0) return msg.channel.send(musicbot.note('fail', 'Maximum queue size reached!'));
+      if (queue.songs.length >= musicbot.maxQueueSize && musicbot.maxQueueSize !== 0) return msg.channel.send(musicbot.note('fail', 'Tamanho máximo da fila atingido!'));
       musicbot.userSearching.set(us, {guild: msg.guild.id, user: msg.author.id, title: suffix})
       let searchstring = suffix.trim();
       msg.channel.send(musicbot.note('search', `Procurando: \`${searchstring}\``))
@@ -947,7 +947,7 @@ try {
                     index++;
                     embed.addField(`${index} (${video.channelTitle})`, `[${musicbot.note('font', video.title)}](${video.url})`, musicbot.inlineEmbeds);
                   });
-                  embed.setFooter(`Procurar por:${msg.author.username}`, msg.author.displayAvatarURL());
+                  embed.setFooter(`Procurar por: ${msg.author.username}`, msg.author.displayAvatarURL());
                   msg.channel.send({
                     embed
                   })
@@ -956,25 +956,25 @@ try {
                     if (max === 0) {
                       filter = m => m.author.id === msg.author.id &&
                       m.content.includes('1') ||
-                      m.content.trim() === (`cancelar`);
+                      m.content.trim() === (`cancel`);
                     } else if (max === 1) {
                       filter = m => m.author.id === msg.author.id &&
                       m.content.includes('1') ||
                       m.content.includes('2') ||
-                      m.content.trim() === (`cancelar`);
+                      m.content.trim() === (`cancel`);
                     } else if (max === 2) {
                       filter = m => m.author.id === msg.author.id &&
                       m.content.includes('1') ||
                       m.content.includes('2') ||
                       m.content.includes('3') ||
-                      m.content.trim() === (`cancelar`);
+                      m.content.trim() === (`cancel`);
                     } else if (max === 3) {
                       filter = m => m.author.id === msg.author.id &&
                       m.content.includes('1') ||
                       m.content.includes('2') ||
                       m.content.includes('3') ||
                       m.content.includes('4') ||
-                      m.content.trim() === (`cancelar`);
+                      m.content.trim() === (`cancel`);
                     } else if (max === 4) {
                       filter = m => m.author.id === msg.author.id &&
                       m.content.includes('1') ||
@@ -982,7 +982,7 @@ try {
                       m.content.includes('3') ||
                       m.content.includes('4') ||
                       m.content.includes('5') ||
-                      m.content.trim() === (`cancelar`);
+                      m.content.trim() === (`cancel`);
                     } else if (max === 5) {
                       filter = m => m.author.id === msg.author.id &&
                       m.content.includes('1') ||
@@ -991,7 +991,7 @@ try {
                       m.content.includes('4') ||
                       m.content.includes('5') ||
                       m.content.includes('6') ||
-                      m.content.trim() === (`cancelar`);
+                      m.content.trim() === (`cancel`);
                     } else if (max === 6) {
                       filter = m => m.author.id === msg.author.id &&
                       m.content.includes('1') ||
@@ -1001,7 +1001,7 @@ try {
                       m.content.includes('5') ||
                       m.content.includes('6') ||
                       m.content.includes('7') ||
-                      m.content.trim() === (`cancelar`);
+                      m.content.trim() === (`cancel`);
                     } else if (max === 7) {
                       filter = m => m.author.id === msg.author.id &&
                       m.content.includes('1') ||
@@ -1012,7 +1012,7 @@ try {
                       m.content.includes('6') ||
                       m.content.includes('7') ||
                       m.content.includes('8') ||
-                      m.content.trim() === (`cancelar`);
+                      m.content.trim() === (`cancel`);
                     } else if (max === 8) {
                       filter = m => m.author.id === msg.author.id &&
                       m.content.includes('1') ||
@@ -1024,7 +1024,7 @@ try {
                       m.content.includes('7') ||
                       m.content.includes('8') ||
                       m.content.includes('9') ||
-                      m.content.trim() === (`cancelar`);
+                      m.content.trim() === (`cancel`);
                     } else if (max === 9) {
                       filter = m => m.author.id === msg.author.id &&
                       m.content.includes('1') ||
@@ -1037,7 +1037,7 @@ try {
                       m.content.includes('8') ||
                       m.content.includes('9') ||
                       m.content.includes('10') ||
-                      m.content.trim() === (`cancelar`);
+                      m.content.trim() === (`cancel`);
                     }
                     msg.channel.awaitMessages(filter, {
                       max: 1,
@@ -1048,7 +1048,7 @@ try {
                       const newColl = Array.from(collected);
                       const mcon = newColl[0][1].content;
 
-                      if (mcon === "cancelar") {
+                      if (mcon === "cancel") {
                         musicbot.userSearching.delete(us);
                         return firstMsg.edit(musicbot.note('note', 'Pesquisa cancelada.'));
                       };
@@ -1086,7 +1086,7 @@ try {
                     })
                     .catch(collected => {
                       musicbot.userSearching.delete(us);
-                      if (collected.toString().match(/error|Error|TypeError|RangeError|Uncaught/)) return firstMsg.edit(`\`\`\`xl\nSearching canceled. ${collected}\n\`\`\``);
+                      if (collected.toString().match(/error|Error|TypeError|RangeError|Uncaught/)) return firstMsg.edit(`\`\`\`xl\nPesquisa cancelada. ${collected}\n\`\`\``);
                       return firstMsg.edit(`\`\`\`xl\nPesquisa cancelada.\n\`\`\``);
                     });
                   })
@@ -1099,25 +1099,25 @@ try {
                     if (max === 0) {
                       filter = m => m.author.id === msg.author.id &&
                       m.content.includes('1') ||
-                      m.content.trim() === (`cancelar`);
+                      m.content.trim() === (`cancel`);
                     } else if (max === 1) {
                       filter = m => m.author.id === msg.author.id &&
                       m.content.includes('1') ||
                       m.content.includes('2') ||
-                      m.content.trim() === (`cancelar`);
+                      m.content.trim() === (`cancel`);
                     } else if (max === 2) {
                       filter = m => m.author.id === msg.author.id &&
                       m.content.includes('1') ||
                       m.content.includes('2') ||
                       m.content.includes('3') ||
-                      m.content.trim() === (`cancelar`);
+                      m.content.trim() === (`cancel`);
                     } else if (max === 3) {
                       filter = m => m.author.id === msg.author.id &&
                       m.content.includes('1') ||
                       m.content.includes('2') ||
                       m.content.includes('3') ||
                       m.content.includes('4') ||
-                      m.content.trim() === (`cancelar`);
+                      m.content.trim() === (`cancel`);
                     } else if (max === 4) {
                       filter = m => m.author.id === msg.author.id &&
                       m.content.includes('1') ||
@@ -1125,7 +1125,7 @@ try {
                       m.content.includes('3') ||
                       m.content.includes('4') ||
                       m.content.includes('5') ||
-                      m.content.trim() === (`cancelar`);
+                      m.content.trim() === (`cancel`);
                     } else if (max === 5) {
                       filter = m => m.author.id === msg.author.id &&
                       m.content.includes('1') ||
@@ -1134,7 +1134,7 @@ try {
                       m.content.includes('4') ||
                       m.content.includes('5') ||
                       m.content.includes('6') ||
-                      m.content.trim() === (`cancelar`);
+                      m.content.trim() === (`cancel`);
                     } else if (max === 6) {
                       filter = m => m.author.id === msg.author.id &&
                       m.content.includes('1') ||
@@ -1144,7 +1144,7 @@ try {
                       m.content.includes('5') ||
                       m.content.includes('6') ||
                       m.content.includes('7') ||
-                      m.content.trim() === (`cancelar`);
+                      m.content.trim() === (`cancel`);
                     } else if (max === 7) {
                       filter = m => m.author.id === msg.author.id &&
                       m.content.includes('1') ||
@@ -1155,7 +1155,7 @@ try {
                       m.content.includes('6') ||
                       m.content.includes('7') ||
                       m.content.includes('8') ||
-                      m.content.trim() === (`cancelar`);
+                      m.content.trim() === (`cancel`);
                     } else if (max === 8) {
                       filter = m => m.author.id === msg.author.id &&
                       m.content.includes('1') ||
@@ -1167,7 +1167,7 @@ try {
                       m.content.includes('7') ||
                       m.content.includes('8') ||
                       m.content.includes('9') ||
-                      m.content.trim() === (`cancelar`);
+                      m.content.trim() === (`cancel`);
                     } else if (max === 9) {
                       filter = m => m.author.id === msg.author.id &&
                       m.content.includes('1') ||
@@ -1180,7 +1180,7 @@ try {
                       m.content.includes('8') ||
                       m.content.includes('9') ||
                       m.content.includes('10') ||
-                      m.content.trim() === (`cancelar`);
+                      m.content.trim() === (`cancel`);
                     }
                     msg.channel.awaitMessages(filter, {
                       max: 1,
@@ -1192,7 +1192,7 @@ try {
                       const newColl = Array.from(collected);
                       const mcon = newColl[0][1].content;
 
-                      if (mcon === "cancelar") return firstMsg.edit(musicbot.note('note', 'Pesquisa cancelada.'));
+                      if (mcon === "cancel") return firstMsg.edit(musicbot.note('note', 'Pesquisa cancelada.'));
                       const song_number = parseInt(mcon) - 1;
                       if (song_number >= 0) {
                         firstMsg.delete();
@@ -1209,7 +1209,7 @@ try {
                         .replace(/`/g, '\\`');
                         embed.setColor(musicbot.embedColor);
                         embed.addField(videos[song_number].channelTitle, `[${songTitle}](${videos[song_number].url})`, musicbot.inlineEmbeds);
-                        embed.addField("Queued On", videos[song_number].queuedOn, musicbot.inlineEmbeds);
+                        embed.addField("Em fila", videos[song_number].queuedOn, musicbot.inlineEmbeds);
                         if (!musicbot.bigPicture) embed.setThumbnail(`https://img.youtube.com/vi/${videos[song_number].id}/maxresdefault.jpg`);
                         if (musicbot.bigPicture) embed.setImage(`https://img.youtube.com/vi/${videos[song_number].id}/maxresdefault.jpg`);
                         const resMem = client.users.cache.get(videos[song_number].requester);
@@ -1256,14 +1256,14 @@ try {
     musicbot.volumeFunction = (msg, suffix, args) => {
       if (!msg.member.voice.channel) return msg.channel.send(musicbot.note('fail', `Você não está em um canal de voz.`));
       const voiceConnection = client.voice.connections.find(val => val.channel.guild.id == msg.guild.id);
-      if (voiceConnection === null) return msg.channel.send(musicbot.note('fail', 'No music is being played.'));
-      if (voiceConnection && voiceConnection.channel.id != msg.member.voice.channel.id) return msg.channel.send(musicbot.note('fail', `You must be in the same voice channel as me.`));
-      if (!musicbot.canAdjust(msg.member, musicbot.queues.get(msg.guild.id))) return msg.channel.send(musicbot.note('fail', `Only admins or DJ's may change volume.`));
+      if (voiceConnection === null) return msg.channel.send(musicbot.note('fail', 'Nenhuma música está sendo tocada.'));
+      if (voiceConnection && voiceConnection.channel.id != msg.member.voice.channel.id) return msg.channel.send(musicbot.note('fail', `Você deve estar no mesmo canal de voz que eu.`));
+      if (!musicbot.canAdjust(msg.member, musicbot.queues.get(msg.guild.id))) return msg.channel.send(musicbot.note('fail', `Somente administradores ou DJs podem alterar o volume.`));
       const dispatcher = voiceConnection.player.dispatcher;
 
-      if (!suffix || isNaN(suffix)) return msg.channel.send(musicbot.note('fail', 'No volume specified.'));
+      if (!suffix || isNaN(suffix)) return msg.channel.send(musicbot.note('fail', 'Nenhum volume especificado.'));
       suffix = parseInt(suffix);
-      if (suffix > 200 || suffix <= 0) return msg.channel.send(musicbot.note('fail', 'Volume out of range, must be within 1 to 200'));
+      if (suffix > 200 || suffix <= 0) return msg.channel.send(musicbot.note('fail', 'O volume fora da faixa deve estar entre 1 e 200'));
 
       dispatcher.setVolume((suffix / 100));
       musicbot.queues.get(msg.guild.id).volume = suffix;
@@ -1271,10 +1271,10 @@ try {
     };
 
     musicbot.clearFunction = (msg, suffix, args) => {
-      if (!musicbot.queues.has(msg.guild.id)) return msg.channel.send(musicbot.note("fail", "No queue found for this server."));
-      if (!musicbot.isAdmin(msg.member)) return msg.channel.send(musicbot.note("fail", `Only Admins or people with the ${musicbot.djRole} can clear queues.`));
+      if (!musicbot.queues.has(msg.guild.id)) return msg.channel.send(musicbot.note("fail", "Nenhuma fila encontrada para este servidor."));
+      if (!musicbot.isAdmin(msg.member)) return msg.channel.send(musicbot.note("fail", `Somente administradores ou pessoas com o ${musicbot.djRole} podem limpar as filas.`));
       let vc = client.voice.connections.find(val => val.channel.guild.id == msg.member.guild.id)
-      if (vc && vc.channel.id != msg.member.voice.channel.id) return msg.channel.send(musicbot.note('fail', `You must be in the same voice channel as me.`));
+      if (vc && vc.channel.id != msg.member.voice.channel.id) return msg.channel.send(musicbot.note('fail', `Você deve estar no mesmo canal de voz que eu.`));
       musicbot.emptyQueue(msg.guild.id).then(res => {
         msg.channel.send(musicbot.note("note", "Fila limpa."));
         const voiceConnection = client.voice.connections.find(val => val.channel.guild.id == msg.guild.id);
@@ -1282,7 +1282,7 @@ try {
           const dispatcher = voiceConnection.player.dispatcher;
           if (!dispatcher || dispatcher === null) {
             if (musicbot.logging) return console.log(new Error(`dispatcher null on skip cmd [${msg.guild.name}] [${msg.author.username}]`));
-            return msg.channel.send(musicbot.note("fail", "Something went wrong."));
+            return msg.channel.send(musicbot.note("fail", "Algo deu errado."));
           };
           if (voiceConnection.paused) dispatcher.destroy();
           dispatcher.destroy();
@@ -1298,7 +1298,7 @@ try {
       if (!musicbot.queues.has(msg.guild.id)) return msg.channel.send(musicbot.note('fail', `No queue for this server found!`));
       if (!suffix)  return msg.channel.send(musicbot.note("fail", "No video position given."));
       let vc = client.voice.connections.find(val => val.channel.guild.id == msg.member.guild.id)
-      if (vc && vc.channel.id != msg.member.voice.channel.id) return msg.channel.send(musicbot.note('fail', `You must be in the same voice channel as me.`));
+      if (vc && vc.channel.id != msg.member.voice.channel.id) return msg.channel.send(musicbot.note('fail', `Você deve estar no mesmo canal de voz que eu.`));
       if (parseInt(suffix) - 1 == 0) return msg.channel.send(musicbot.note("fail", "You cannot clear the currently playing music."));
       let test = musicbot.queues.get(msg.guild.id).songs.find(x => x.position == parseInt(suffix) - 1);
       if (test) {
@@ -1306,21 +1306,21 @@ try {
         let newq = musicbot.queues.get(msg.guild.id).songs.filter(s => s !== test);
         musicbot.updatePositions(musicbot.queues.get(msg.guild.id), msg.guild.id).then(res => {
           musicbot.queues.get(msg.guild.id).songs = res;
-          msg.channel.send(musicbot.note("note", `Removido:  \`${test.title.replace(/`/g, "'")}\``));
+          msg.channel.send(musicbot.note("note", `Removed:  \`${test.title.replace(/`/g, "'")}\``));
         }).catch(e=> {
           console.log(e)
           console.log("@ remove function");
         })
       } else {
-        msg.channel.send(musicbot.note("fail", "Couldn't find that video or something went wrong."));
+        msg.channel.send(musicbot.note("fail", "Não foi possível encontrar o vídeo ou algo deu errado."));
       }
     };
 
     musicbot.loopFunction = (msg, suffix, args) => {
       if (!msg.member.voice.channel) return msg.channel.send(musicbot.note('fail', `Você não está em um canal de voz.`));
-      if (!musicbot.queues.has(msg.guild.id)) return msg.channel.send(musicbot.note('fail', `No queue for this server found!`));
+      if (!musicbot.queues.has(msg.guild.id)) return msg.channel.send(musicbot.note('fail', `Nenhuma fila para este servidor encontrada!`));
       let vc = client.voice.connections.find(val => val.channel.guild.id == msg.member.guild.id)
-      if (vc && vc.channel.id != msg.member.voice.channel.id) return msg.channel.send(musicbot.note('fail', `You must be in the same voice channel as me.`));
+      if (vc && vc.channel.id != msg.member.voice.channel.id) return msg.channel.send(musicbot.note('fail', `Você deve estar no mesmo canal de voz que eu.`));
       if (musicbot.queues.get(msg.guild.id).loop == "none" || musicbot.queues.get(msg.guild.id).loop == null) {
         musicbot.queues.get(msg.guild.id).loop = "song";
         msg.channel.send(musicbot.note('note', 'Looping único ativado! :repeat_one:'));
@@ -1346,13 +1346,13 @@ try {
     };
     musicbot.shuffleFunction = (msg, suffix, args) => {
       let q = musicbot.getQueue(msg.guild.id);
-      if (q.working == true) return msg.channel.send(musicbot.note('fail', `This servers queue is already performing a task!`));
+      if (q.working == true) return msg.channel.send(musicbot.note('fail', `Essa fila de servidores já está executando uma tarefa!`));
       if (!msg.member.voice.channel) return msg.channel.send(musicbot.note('fail', `Você não está em um canal de voz.`));
-      if (!musicbot.queues.has(msg.guild.id)) return msg.channel.send(musicbot.note('fail', `No queue for this server found!`));
+      if (!musicbot.queues.has(msg.guild.id)) return msg.channel.send(musicbot.note('fail', `Nenhuma fila para este servidor encontrada!`));
       const voiceConnection = client.voice.connections.find(val => val.channel.guild.id == msg.guild.id);
-      if (voiceConnection && voiceConnection.channel.id != msg.member.voice.channel.id) return msg.channel.send(musicbot.note('fail', `You must be in the same voice channel as me.`));
+      if (voiceConnection && voiceConnection.channel.id != msg.member.voice.channel.id) return msg.channel.send(musicbot.note('fail', `Você deve estar no mesmo canal de voz que eu.`));
       if (musicbot.queues.get(msg.guild.id).songs.length < musicbot.minShuffle) return msg.channel.send(musicbot.note('fail', `Queue must a minimum of ${musicbot.minShuffle} songs to shuffle!`));
-      if (musicbot.queues.get(msg.guild.id).loop == "song") return msg.channel.send(musicbot.note("fail", `Cannot shuffle while loop is set to single.`));
+      if (musicbot.queues.get(msg.guild.id).loop == "song") return msg.channel.send(musicbot.note("fail", `Não é possível embaralhar enquanto o loop estiver definido como único.`));
       const dispatcher = voiceConnection.player.dispatcher;
       q.oldSongs = q.songs;
       q.songs.musicBotShuffle();
@@ -1462,7 +1462,7 @@ try {
               .setFooter(`Requerido por ${req !== null ? req.username : "Usuário desconhecido"}`, `${req !== null ? req.displayAvatarURL() : null}`);
               msg.channel.send({embed});
             } else {
-              msg.channel.send(musicbot.note("note", `\`${video.title.replace(/`/g, "''")}\` by \`${video.channelURL.replace(/`/g, "''")}\``))
+              msg.channel.send(musicbot.note("note", `\`${video.title.replace(/`/g, "''")}\` no \`${video.channelURL.replace(/`/g, "''")}\``))
             }
           }
 
@@ -1606,7 +1606,7 @@ try {
           return input;
       }});
     } catch (e) {
-      throw new Error("could not defineProperty(s) musicArraySort or musicBotShuffle, you are likely running this script twice. actual error: " + e.stack)
+      throw new Error("não foi possível definir a propriedade musicArraySort ou musicBotShuffle, é provável que você esteja executando este script duas vezes. erro real: " + e.stack)
     };
   } catch (e) {
     console.error(e);
