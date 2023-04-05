@@ -676,7 +676,7 @@ exports.start = (client, options) => {
           embed.setAuthor(command.name, msg.client.user.avatarURL);
           embed.setDescription(command.help);
           if (command.alt.length > 0) embed.addField(`Aliases`, command.alt.join(", "), musicbot.inlineEmbeds);
-          if (command.usage && typeof command.usage == "string") embed.addField(`Uso`, command.usage.replace(/{{prefix}})/g, prefix), musicbot.inlineEmbeds);
+          if (command.usage && typeof command.usage == "string") embed.addField(`Uso`, command.usage.replace(/{{prefix}}/g, prefix), musicbot.inlineEmbeds);
           embed.setColor(musicbot.embedColor);
           msg.channel.send({
             embed
@@ -686,7 +686,7 @@ exports.start = (client, options) => {
           if (command.exclude) return msg.channel.send(musicbot.note('fail', `${suffix} is not a valid command!`));
           var cmdhelp = `= ${command.name} =\n`;
           cmdhelp = cmdhelp + `\n${command.help}`;
-          if (command.usage !== null) cmdhelp = cmdhelp + `\nComo usar: ${command.usage.replace(/{{prefix}})/g, prefix)}`;
+          if (command.usage !== null) cmdhelp = cmdhelp + `\nComo usar: ${command.usage.replace(/{{prefix}}/g, prefix)}`;
           if (command.alt.length > 0) cmdhelp = cmdhelp + `\nAliases: ${command.alt.join(", ")}`;
           msg.channel.send(cmdhelp, {
             code: 'asciidoc'
