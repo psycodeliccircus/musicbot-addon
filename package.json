@@ -1,6 +1,6 @@
 {
   "name": "musicbot-addon",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Uma simples extensão / bot de música baseada em Node.js. para projetos Discord.js. usando o YouTube.",
   "main": "index.js",
   "scripts": {
@@ -8,9 +8,9 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
-    "ytdl-core": "^1.0.7",
-    "ytpl": "^0.1.18",
-    "ytsearcher": "^1.2.2"
+    "ytdl-core": "^4.11.3",
+    "ytpl": "^2.3.0",
+    "ytsearcher": "^1.2.4"
   },
   "repository": {
     "type": "git",
